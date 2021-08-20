@@ -23,7 +23,11 @@ class PicturesController < ApplicationController
   # user_idとimageは後で書き足す
   def create
     Picture.create(picture_params)
-    redirect_to new_picture_path
+    if @blog.save
+      redirect_to new_picture_path
+    else
+      render :new
+    end
   end
 
   # PATCH/PUT /pictures/1 or /pictures/1.json
