@@ -22,7 +22,7 @@ class PicturesController < ApplicationController
   # POST /pictures or /pictures.json
   # user_idとimageは後で書き足す
   def create
-    Picture.create(title: params[:picture][:title], content: params[:picture][:content])
+    Picture.create(picture_params)
     redirect_to new_picture_path
   end
 
