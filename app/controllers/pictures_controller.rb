@@ -23,7 +23,7 @@ class PicturesController < ApplicationController
   # user_idとimageは後で書き足す
   def create
     Picture.create(picture_params)
-    if @blog.save
+    if @picture.save
       redirect_to new_picture_path
     else
       render :new
@@ -32,14 +32,10 @@ class PicturesController < ApplicationController
 
   # PATCH/PUT /pictures/1 or /pictures/1.json
   def update
-    respond_to do |format|
-      if @picture.update(picture_params)
-        format.html { redirect_to @picture, notice: "Picture was successfully updated." }
-        format.json { render :show, status: :ok, location: @picture }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @picture.errors, status: :unprocessable_entity }
-      end
+    if @picture.update(picture_params)
+      redirect_to pictures_path, notice: "ブログを編集しました！"
+    else
+      render :edit
     end
   end
 
