@@ -20,18 +20,10 @@ class PicturesController < ApplicationController
   end
 
   # POST /pictures or /pictures.json
+  # user_idとimageは後で書き足す
   def create
-    @picture = Picture.new(picture_params)
-
-    respond_to do |format|
-      if @picture.save
-        format.html { redirect_to @picture, notice: "Picture was successfully created." }
-        format.json { render :show, status: :created, location: @picture }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @picture.errors, status: :unprocessable_entity }
-      end
-    end
+    Picture.create(title: params[:picture][:title], content: params[:picture][:content])
+    redirect_to new_picture_path
   end
 
   # PATCH/PUT /pictures/1 or /pictures/1.json
