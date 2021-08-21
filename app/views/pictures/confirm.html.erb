@@ -1,0 +1,9 @@
+<h3>以下の内容で、送信する。</h3>
+<%= form_with(model: @picture, local: true) do |form| %>
+  <%= form.hidden_field :title %>
+  <%= form.hidden_field :content %>
+  <p>Title:<%= @picture.title %></p>
+  <p>Content:<%= @picture.content %></p>
+  <%= form.submit  "OK" %>
+  <%= form.submit "back", name: 'back' %>
+<% end %>

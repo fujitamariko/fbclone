@@ -23,10 +23,14 @@ class PicturesController < ApplicationController
   # user_idとimageは後で書き足す
   def create
     Picture.create(picture_params)
-    if @picture.save
-      redirect_to new_picture_path
-    else
+    if params[:back]
       render :new
+    else
+      if @picture.save
+        redirect_to new_picture_path
+      else
+        render :new
+      end
     end
   end
 
@@ -42,7 +46,12 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1 or /pictures/1.json
   def destroy
     @picture.destroy
-    redirect_to blogs_path, notice:"ブログを削除しました！"
+    redirect_to pictures_path, notice:"ブログを削除しました！"
+  end
+
+  def confirm
+    @picture = Picture.new(picture_params)
+    render :new if @picture.invalid?
   end
 
   private
