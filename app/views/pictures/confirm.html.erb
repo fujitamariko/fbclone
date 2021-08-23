@@ -3,15 +3,11 @@
   <%= form.hidden_field :user_id %>
   <%= form.hidden_field :title %>
   <%= form.hidden_field :content %>
-  <%= image_tag(@picture.image.url) if @picture.image && @picture.image.url %>
   <%= form.hidden_field :image_cache %>
-<% end %>
-<%= form_with(model:@picture, url:new_picture_path, local:true, method:"get") do |form| %>
   <p>ID:<%= @picture.user_id %></p>
   <p>Title:<%= @picture.title %></p>
   <p>Content:<%= @picture.content %></p>
-  <p>Image:<%= @picture.image %></p>
-  <%= form.hidden_field :image_cache %>
+  <p>Image:<%= image_tag @picture.image.url %></p>
   <%= form.submit  "OK" %>
   <%= form.submit "back", name: 'back' %>
 <% end %>
